@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>결! 합! 게임</title>
+    <style>
+      .main-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        gap: 20px;
+      }
+
+      .title {
+        font-size: 3em;
+        margin-bottom: 30px;
+      }
+
+      .mode-button {
+        padding: 15px 40px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        width: 200px;
+      }
+
+      .mode-button:hover {
+        transform: scale(1.05);
+      }
+
+      .easy {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .hard {
+        background-color: #f44336;
+        color: white;
+      }
+
+      .secret {
+        background-color: #9c27b0;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-menu">
+      <h1 class="title">결! 합! 게임</h1>
+      <a href="easy.html"
+        ><button class="mode-button easy">이지 모드</button></a
+      >
+      <a href="hard.html"
+        ><button class="mode-button hard">하드 모드</button></a
+      >
+      <a href="secret.html"
+        ><button class="mode-button secret">시크릿 모드</button></a
+      >
+    </div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>결! 합! 게임 (이지모드)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="main-area">
+        <div class="game-section">
+          <div class="header">
+            <div class="timer">남은 시간: <span id="time">120</span>초</div>
+            <div class="score">점수: <span id="score">0</span></div>
+            <div class="round">라운드: <span id="round">1</span></div>
+          </div>
+
+          <div id="message" class="message"></div>
+          <div class="selection-area">
+            <div class="selected-numbers">
+              선택한 카드: <span id="selectedNumbers"></span>
+            </div>
+            <button id="gyeol">결!</button>
+          </div>
+          <div class="cards-container" id="cardsContainer"></div>
+        </div>
+
+        <div class="right-section">
+          <a href="main.html" class="back-button">돌아가기</a>
+          <div class="found-sets">
+            <div class="found-sets-header">
+              <h3>찾은 합</h3>
+            </div>
+            <div id="remainingHint" class="remaining-hint">남은 합: 0개</div>
+            <div id="foundSets"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

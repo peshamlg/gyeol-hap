@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.game-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  position: relative;
+}
+
+.header-info {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  gap: 20px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.card {
+  aspect-ratio: 1;
+  border: 2px solid #333;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 40px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card.selected {
+  border: 3px solid #4caf50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.card-number {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+}
+
+input[type="number"] {
+  width: 100px;
+  padding: 5px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#gyeol {
+  background-color: #2196f3;
+}
+
+#gyeol:hover {
+  background-color: #1976d2;
+}
+
+.shape {
+  width: 60%;
+  height: 60%;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.square {
+  width: 60%;
+  height: 60%;
+}
+
+.main-area {
+  display: flex;
+  gap: 20px;
+}
+
+.game-section {
+  flex: 3;
+}
+
+.right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.found-sets {
+  flex: 1;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.found-set {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.message.error {
+  background-color: #ffebee;
+  color: #c62828;
+  opacity: 1;
+}
+
+.message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  opacity: 1;
+}
+
+.found-sets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.remaining-hint {
+  margin: 10px 0 15px;
+  padding: 10px;
+  background-color: #e3f2fd;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.remaining-hint.show {
+  display: block;
+}
+
+.selected-numbers {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  font-size: 1.1em;
+}
+
+.selection-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  gap: 10px;
+}
+
+.selected-numbers {
+  flex: 1;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  font-size: 1.1em;
+}
+
+#gyeol {
+  padding: 10px 24px;
+  height: 100%;
+  background-color: #2196f3;
+  white-space: nowrap;
+}
+
+#gyeol:hover {
+  background-color: #1976d2;
+}
+
+.back-button {
+  position: static;
+  padding: 8px 15px;
+  background-color: #666;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.back-button:hover {
+  background-color: #555;
+}
