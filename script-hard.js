@@ -83,6 +83,8 @@ class Game {
   }
 
   handleCardClick(cardNumber) {
+    if (this.gameOver) return;
+
     const cardIndex = this.selectedCards.indexOf(cardNumber);
 
     if (cardIndex !== -1) {
@@ -186,6 +188,8 @@ class Game {
 
   setupEventListeners() {
     document.getElementById("gyeol").addEventListener("click", () => {
+      if (this.gameOver) return;
+
       const allPossibleSets = this.findAllSets();
       const foundSetsCount = this.foundSets.length;
 
@@ -214,9 +218,11 @@ class Game {
 
       if (this.time <= 0) {
         clearInterval(this.timer);
+        this.gameOver = true;
         alert(
           `게임 종료!\n완료한 라운드: ${this.round}\n찾은 합의 개수: ${this.score}`
         );
+        window.location.href = "index.html";
       }
     }, 1000);
   }
