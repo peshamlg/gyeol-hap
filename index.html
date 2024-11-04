@@ -46,6 +46,111 @@
         background-color: #9c27b0;
         color: white;
       }
+
+      .rules-button {
+        background-color: #2196f3;
+        color: white;
+        margin-top: 20px;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .modal-content {
+        position: relative;
+        background-color: white;
+        margin: 5% auto;
+        padding: 20px;
+        width: 70%;
+        max-width: 800px;
+        border-radius: 10px;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+
+      .close {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        font-size: 28px;
+        cursor: pointer;
+      }
+
+      .pagination {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .page-button {
+        padding: 5px 10px;
+        margin: 0 5px;
+        cursor: pointer;
+        background-color: #ddd;
+        border: none;
+        border-radius: 4px;
+      }
+
+      .page-button.active {
+        background-color: #2196f3;
+        color: white;
+      }
+
+      .page {
+        display: none;
+      }
+
+      .page.active {
+        display: block;
+      }
+
+      .card {
+        position: relative;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .shape {
+        width: 60%;
+        height: 60%;
+        border-radius: 4px;
+      }
+
+      .circle {
+        border-radius: 50%;
+      }
+
+      .triangle {
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      }
+
+      .square {
+        border-radius: 0;
+      }
+
+      .hidden-card {
+        background-color: #9c27b0 !important;
+        cursor: not-allowed;
+      }
+
+      .hidden-card .shape {
+        display: none;
+      }
+
+      .hidden-card::after {
+        content: "?";
+        font-size: 2em;
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -60,6 +165,273 @@
       <a href="secret.html"
         ><button class="mode-button secret">시크릿 모드</button></a
       >
+      <button class="mode-button rules-button" onclick="openModal()">
+        게임 설명
+      </button>
     </div>
+
+    <div id="rulesModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <div class="page active" id="page1">
+          <h2>결!합! 이란?</h2>
+          <p>
+            결!합!은 도형의 모양, 도형의 색상, 배경의 색상 3가지의 성질이 각각
+            다른 27장의 타일 중, 보드판에 제공되는 9장의 타일 중 특정한 조건을
+            만족하는 3장의 타일을 찾는 게임입니다.
+          </p>
+
+          <h3>합이란?</h3>
+          <p>
+            합이란 3장의 타일이 가지고 있는 성질이 모두 동일하거나 모두 다른
+            경우를 뜻합니다.
+          </p>
+
+          <div style="margin: 20px 0">
+            <h4>합이 되는 예시</h4>
+            <div style="display: flex; gap: 10px; margin-bottom: 10px">
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: white"
+              >
+                <div class="shape circle" style="background-color: red"></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: white"
+              >
+                <div class="shape triangle" style="background-color: red"></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: white"
+              >
+                <div class="shape square" style="background-color: red"></div>
+              </div>
+            </div>
+            <p>
+              위 3장의 타일은 배경색(흰색)과 도형색(빨강)이 모두 같고, 도형
+              모양(동그라미, 세모, 네모)이 모두 다르므로 합입니다.
+            </p>
+          </div>
+
+          <div style="margin: 20px 0">
+            <h4>합이 되지 않는 예시</h4>
+            <div style="display: flex; gap: 10px; margin-bottom: 10px">
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: white"
+              >
+                <div class="shape circle" style="background-color: blue"></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: gray"
+              >
+                <div class="shape circle" style="background-color: blue"></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: black"
+              >
+                <div class="shape circle" style="background-color: red"></div>
+              </div>
+            </div>
+            <p>
+              위 3장의 타일은 도형 모양(동그라미)이 모두 같고, 배경색(흰색,
+              회색, 검정색)이 모두 다르지만 도형색이 일부만 같으므로 합이
+              아닙니다.
+            </p>
+          </div>
+
+          <h3>결이란?</h3>
+          <p>
+            주어진 9장의 타일 중에서 합이 되는 모든 쌍을 찾았다면 결을 선언할 수
+            있습니다. 실제로 더 이상 남은 합이 없는 경우 올바른 결이 되고, 다음
+            라운드로 이동합니다.
+          </p>
+        </div>
+
+        <div class="page" id="page2">
+          <h2>기본 규칙</h2>
+          <p>2분의 제한 시간 동안 최대한 많은 합과 결을 찾으면 됩니다.</p>
+          <p>
+            올바른 합을 찾으면 제한시간이 3초 추가되고, 잘못된 합을 찾은 경우
+            제한시간이 3초 줄어듭니다.
+          </p>
+          <p>
+            올바른 결을 선언하면 다음 라운드로 이동하면서 제한시간이 20초
+            추가되고, 잘못된 결을 선언한 경우 제한시간이 5초 줄어듭니다.
+          </p>
+          <p>
+            제한 시간을 모두 소모하면 게임이 종료되고, 진행한 라운드의 수와
+            점수(찾은 합의 개수)를 확인할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="page" id="page3">
+          <h2>결!합! 시크릿 모드</h2>
+          <p>시크릿 모드는 일반 결!합!과 다르게 8장의 타일만 공개됩니다.</p>
+          <p>나머지 1장의 타일 대신 이 보드의 합의 개수를 알려 줍니다.</p>
+
+          <div style="margin: 20px 0">
+            <h4>보드 예시 (목표 합: 6개)</h4>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(3, 80px);
+                gap: 10px;
+                margin-bottom: 10px;
+                width: fit-content;
+                height: fit-content;
+              "
+            >
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: white"
+              >
+                <div class="shape circle" style="background-color: red"></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: gray"
+              >
+                <div
+                  class="shape triangle"
+                  style="background-color: blue"
+                ></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: black"
+              >
+                <div
+                  class="shape square"
+                  style="background-color: yellow"
+                ></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: white"
+              >
+                <div
+                  class="shape triangle"
+                  style="background-color: yellow"
+                ></div>
+              </div>
+              <div class="card hidden-card" style="width: 80px; height: 80px">
+                <div class="shape"></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: black"
+              >
+                <div class="shape circle" style="background-color: blue"></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: gray"
+              >
+                <div class="shape square" style="background-color: red"></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: white"
+              >
+                <div
+                  class="shape circle"
+                  style="background-color: yellow"
+                ></div>
+              </div>
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: black"
+              >
+                <div class="shape triangle" style="background-color: red"></div>
+              </div>
+            </div>
+
+            <h4>가능한 타일 찾기</h4>
+            <p>위 보드에서 ? 위치에 들어갈 수 있는 타일을 찾아봅시다.</p>
+            <div style="display: flex; gap: 10px; margin: 10px 0">
+              <div
+                class="card"
+                style="width: 80px; height: 80px; background-color: gray"
+              >
+                <div class="shape square" style="background-color: blue"></div>
+              </div>
+            </div>
+            <p>이 타일이 들어가면 다음과 같은 6개의 합이 만들어집니다:</p>
+            <ol style="margin-left: 20px">
+              <li>
+                1번, 2번, 3번 카드 - 도형 모양(동그라미, 세모, 네모),
+                도형색(빨강, 파랑, 노랑), 배경색(흰색, 회색, 검정)이 모두
+                다릅니다.
+              </li>
+              <li>
+                1번, 7번, 9번 카드 - 도형색(빨강)이 모두 같고, 도형
+                모양(동그라미, 네모, 세모)과 배경색(흰색, 회색, 검정)이 모두
+                다릅니다.
+              </li>
+              <li>
+                2번, 4번, 9번 카드 - 도형 모양(세모)이 모두 같고, 도형색(파랑,
+                노랑, 빨강)과 배경색(회색, 흰색, 검정)이 모두 다릅니다.
+              </li>
+              <li>
+                3번, 6번, 9번 카드 - 배경색(검정)이 모두 같고, 도형 모양(네모,
+                동그라미, 세모)과 도형색(노랑, 파랑, 빨강)이 모두 다릅니다.
+              </li>
+              <li>
+                4번, 6번, 7번 카드 - 배경색(흰색, 검정, 회색), 도형 모양(세모,
+                동그라미, 네모), 도형색(노랑, 파랑, 빨강)이 모두 다릅니다.
+              </li>
+              <li>
+                5번(추가된 타일), 8번, 9번 카드 - 도형 모양(네모, 동그라미,
+                세모)이 모두 다르고, 도형색(파랑, 노랑, 빨강)과 배경색(회색,
+                흰색, 검정)이 모두 다릅니다.
+              </li>
+            </ol>
+          </div>
+
+          <p>시크릿 모드는 기본 결!합!에 비해서 더 꼼꼼한 계산이 필요합니다.</p>
+        </div>
+
+        <div class="pagination">
+          <button class="page-button active" onclick="showPage(1)">1</button>
+          <button class="page-button" onclick="showPage(2)">2</button>
+          <button class="page-button" onclick="showPage(3)">3</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        document.getElementById("rulesModal").style.display = "block";
+      }
+
+      function closeModal() {
+        document.getElementById("rulesModal").style.display = "none";
+      }
+
+      function showPage(pageNum) {
+        const pages = document.querySelectorAll(".page");
+        const buttons = document.querySelectorAll(".page-button");
+
+        pages.forEach((page) => page.classList.remove("active"));
+        buttons.forEach((button) => button.classList.remove("active"));
+
+        document.getElementById(`page${pageNum}`).classList.add("active");
+        buttons[pageNum - 1].classList.add("active");
+      }
+
+      // 모달 외부 클릭시 닫기
+      window.onclick = function (event) {
+        const modal = document.getElementById("rulesModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
   </body>
 </html>
