@@ -3,159 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <title>결! 합! 게임</title>
-    <style>
-      .main-menu {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        gap: 20px;
-      }
-
-      .title {
-        font-size: 3em;
-        margin-bottom: 30px;
-      }
-
-      .mode-button {
-        padding: 15px 40px;
-        font-size: 1.2em;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: transform 0.2s;
-        width: 200px;
-      }
-
-      .mode-button:hover {
-        transform: scale(1.05);
-      }
-
-      .easy {
-        background-color: #4caf50;
-        color: white;
-      }
-
-      .hard {
-        background-color: #f44336;
-        color: white;
-      }
-
-      .secret {
-        background-color: #9c27b0;
-        color: white;
-      }
-
-      .rules-button {
-        background-color: #2196f3;
-        color: white;
-        margin-top: 20px;
-      }
-
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-      }
-
-      .modal-content {
-        position: relative;
-        background-color: white;
-        margin: 5% auto;
-        padding: 20px;
-        width: 70%;
-        max-width: 800px;
-        border-radius: 10px;
-        max-height: 80vh;
-        overflow-y: auto;
-      }
-
-      .close {
-        position: absolute;
-        right: 20px;
-        top: 10px;
-        font-size: 28px;
-        cursor: pointer;
-      }
-
-      .pagination {
-        text-align: center;
-        margin-top: 20px;
-      }
-
-      .page-button {
-        padding: 5px 10px;
-        margin: 0 5px;
-        cursor: pointer;
-        background-color: #ddd;
-        border: none;
-        border-radius: 4px;
-      }
-
-      .page-button.active {
-        background-color: #2196f3;
-        color: white;
-      }
-
-      .page {
-        display: none;
-      }
-
-      .page.active {
-        display: block;
-      }
-
-      .card {
-        position: relative;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      }
-
-      .shape {
-        width: 60%;
-        height: 60%;
-        border-radius: 4px;
-      }
-
-      .circle {
-        border-radius: 50%;
-      }
-
-      .triangle {
-        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-      }
-
-      .square {
-        border-radius: 0;
-      }
-
-      .hidden-card {
-        background-color: #9c27b0 !important;
-        cursor: not-allowed;
-      }
-
-      .hidden-card .shape {
-        display: none;
-      }
-
-      .hidden-card::after {
-        content: "?";
-        font-size: 2em;
-        color: white;
-      }
-    </style>
+    <link rel="stylesheet" href="style-index.css" />
   </head>
   <body>
     <div class="main-menu">
       <h1 class="title">결! 합! 게임</h1>
+      <a
+        href="javascript:void(0)"
+        onclick="if(!checkDailyCompletion()) window.location.href='daily.html';"
+        ><button class="mode-button daily">데일리 모드</button></a
+      >
       <a href="easy.html"
         ><button class="mode-button easy">이지 모드</button></a
       >
@@ -257,16 +114,17 @@
           <h2>기본 규칙</h2>
           <p>2분의 제한 시간 동안 최대한 많은 합과 결을 찾으면 됩니다.</p>
           <p>
-            올바른 합을 찾으면 제한시간이 3초 추가되고, 잘못된 합을 찾은 경우
-            제한시간이 3초 줄어듭니다.
+            올바른 합을 찾으면 1점을 획득하고 제한시간이 3초 추가됩니다.<br />
+            잘못된 합을 찾은 경우 1점이 감점되고 제한시간이 3초 줄어듭니다.
           </p>
           <p>
-            올바른 결을 선언하면 다음 라운드로 이동하면서 제한시간이 20초
-            추가되고, 잘못된 결을 선언한 경우 제한시간이 5초 줄어듭니다.
+            올바른 결을 선언하면 3점을 획득하고 다음 라운드로 이동하면서
+            제한시간이 20초 추가됩니다.<br />
+            잘못된 결을 선언한 경우 1점이 감점되고 제한시간이 5초 줄어듭니다.
           </p>
           <p>
             제한 시간을 모두 소모하면 게임이 종료되고, 진행한 라운드의 수와
-            점수(찾은 합의 개수)를 확인할 수 있습니다.
+            점수를 확인할 수 있습니다.
           </p>
         </div>
 
@@ -353,7 +211,7 @@
             </div>
 
             <h4>가능한 타일 찾기</h4>
-            <p>위 보드에서 ? 위치에 들어갈 수 있는 타일을 찾아봅시다.</p>
+            <p>위 보드에서 ? 칸에 들어갈 수 있는 타일을 찾아봅시다.</p>
             <div style="display: flex; gap: 10px; margin: 10px 0">
               <div
                 class="card"
@@ -405,33 +263,6 @@
       </div>
     </div>
 
-    <script>
-      function openModal() {
-        document.getElementById("rulesModal").style.display = "block";
-      }
-
-      function closeModal() {
-        document.getElementById("rulesModal").style.display = "none";
-      }
-
-      function showPage(pageNum) {
-        const pages = document.querySelectorAll(".page");
-        const buttons = document.querySelectorAll(".page-button");
-
-        pages.forEach((page) => page.classList.remove("active"));
-        buttons.forEach((button) => button.classList.remove("active"));
-
-        document.getElementById(`page${pageNum}`).classList.add("active");
-        buttons[pageNum - 1].classList.add("active");
-      }
-
-      // 모달 외부 클릭시 닫기
-      window.onclick = function (event) {
-        const modal = document.getElementById("rulesModal");
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      };
-    </script>
+    <script src="script-index.js"></script>
   </body>
 </html>

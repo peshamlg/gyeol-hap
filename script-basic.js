@@ -116,6 +116,7 @@ class Game {
       this.showMessage("정답입니다!", "success");
     } else {
       this.time -= 3;
+      this.score--;
       this.showMessage("틀렸습니다. 다시 시도해주세요.");
     }
     this.selectedCards = [];
@@ -199,10 +200,12 @@ class Game {
       if (allPossibleSets.length === foundSetsCount) {
         this.time += 20;
         this.round++;
+        this.score += 3;
         this.showMessage("정확한 결! 다음 라운드로 진행합니다.", "success");
         this.startNewRound();
       } else {
         this.time -= 5;
+        this.score--;
         this.showMessage("아직 찾을 수 있는 합이 남아있습니다!");
       }
     });
@@ -222,9 +225,7 @@ class Game {
       if (this.time <= 0) {
         clearInterval(this.timer);
         this.gameOver = true;
-        alert(
-          `게임 종료!\n완료한 라운드: ${this.round}\n찾은 합의 개수: ${this.score}`
-        );
+        alert(`게임 종료!\n완료한 라운드: ${this.round}\n점수: ${this.score}`);
         window.location.href = "index.html";
       }
     }, 1000);

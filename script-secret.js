@@ -1,3 +1,11 @@
+class Card {
+  constructor(shape, bgColor, shapeColor) {
+    this.shape = shape;
+    this.bgColor = bgColor;
+    this.shapeColor = shapeColor;
+  }
+}
+
 class Game {
   constructor() {
     this.shapes = ["circle", "triangle", "square"];
@@ -257,14 +265,6 @@ class Game {
         this.showMessage("아직 찾지 못한 타일이 있습니다!");
       }
     });
-  }
-}
-
-class Card {
-  constructor(shape, bgColor, shapeColor) {
-    this.shape = shape;
-    this.bgColor = bgColor;
-    this.shapeColor = shapeColor;
   }
 }
 

@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>결! 합! 게임 (하드모드)</title>
+    <title>결! 합! 게임 (데일리 모드)</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -10,9 +10,11 @@
       <div class="main-area">
         <div class="game-section">
           <div class="header">
-            <div class="timer">남은 시간: <span id="time">120</span>초</div>
+            <div class="elapsed-time">
+              경과 시간: <span id="elapsedTime">00:00</span>
+            </div>
             <div class="score">점수: <span id="score">0</span></div>
-            <div class="round">라운드: <span id="round">1</span></div>
+            <div class="stage">스테이지: <span id="stage">1</span>/3</div>
           </div>
 
           <div id="message" class="message"></div>
@@ -43,6 +45,6 @@
         </div>
       </div>
     </div>
-    <script src="script-basic.js"></script>
+    <script src="script-daily.js"></script>
   </body>
 </html>
