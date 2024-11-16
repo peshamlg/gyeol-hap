@@ -156,3 +156,30 @@
   font-size: 2em;
   color: white;
 }
+
+.records {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.record-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mode-label {
+  font-weight: bold;
+  color: #ddd;
+}
+
+.record-text {
+  color: #000;
+}

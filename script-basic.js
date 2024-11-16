@@ -110,7 +110,6 @@ class Game {
       this.showMessage("이미 제출한 합입니다!");
       this.time -= 3;
     } else if (this.checkSet(this.selectedCards)) {
-      this.time += 5;
       this.score++;
       this.addFoundSet(this.selectedCards);
       this.showMessage("정답입니다!", "success");
@@ -204,7 +203,7 @@ class Game {
         this.showMessage("정확한 결! 다음 라운드로 진행합니다.", "success");
         this.startNewRound();
       } else {
-        this.time -= 5;
+        this.time -= 10;
         this.score--;
         this.showMessage("아직 찾을 수 있는 합이 남아있습니다!");
       }
@@ -225,6 +224,11 @@ class Game {
       if (this.time <= 0) {
         clearInterval(this.timer);
         this.gameOver = true;
+        const gameMode = document.title.includes("이지") ? "easy" : "hard";
+        updateRecord(gameMode, {
+          round: this.round,
+          score: this.score,
+        });
         alert(`게임 종료!\n완료한 라운드: ${this.round}\n점수: ${this.score}`);
         window.location.href = "index.html";
       }
@@ -236,6 +240,16 @@ class Game {
     document.getElementById(
       "remainingHint"
     ).textContent = `남은 합: ${remaining}개`;
+  }
+}
+
+function updateRecord(mode, newRecord) {
+  const currentRecord = JSON.parse(
+    localStorage.getItem(`${mode}Record`) || "{}"
+  );
+
+  if (!currentRecord.score || newRecord.score > currentRecord.score) {
+    localStorage.setItem(`${mode}Record`, JSON.stringify(newRecord));
   }
 }
 

@@ -48,3 +48,39 @@ function checkDailyCompletion() {
   }
   return false;
 }
+
+function displayRecords() {
+  const easyRecord = JSON.parse(localStorage.getItem("easyRecord") || "{}");
+  const hardRecord = JSON.parse(localStorage.getItem("hardRecord") || "{}");
+  const dailyRecord = JSON.parse(localStorage.getItem("dailyRecord") || "{}");
+
+  // 이지 모드 기록 표시
+  document.querySelector("#easyRecord .record-text").textContent =
+    easyRecord.score
+      ? `${easyRecord.round}라운드 / ${easyRecord.score}점`
+      : "기록 없음";
+
+  // 하드 모드 기록 표시
+  document.querySelector("#hardRecord .record-text").textContent =
+    hardRecord.score
+      ? `${hardRecord.round}라운드 / ${hardRecord.score}점`
+      : "기록 없음";
+
+  // 데일리 모드 기록 표시 (시간을 분:초 형식으로 변환)
+  if (dailyRecord.time) {
+    const minutes = Math.floor(dailyRecord.time / 60);
+    const seconds = dailyRecord.time % 60;
+    const timeString = `${String(minutes).padStart(2, "0")}:${String(
+      seconds
+    ).padStart(2, "0")}`;
+    document.querySelector(
+      "#dailyRecord .record-text"
+    ).textContent = `${timeString} / ${dailyRecord.score}점`;
+  } else {
+    document.querySelector("#dailyRecord .record-text").textContent =
+      "기록 없음";
+  }
+}
+
+// 페이지 로드 시 기록 표시
+document.addEventListener("DOMContentLoaded", displayRecords);

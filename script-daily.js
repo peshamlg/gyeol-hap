@@ -324,6 +324,20 @@ class Game {
           };
           localStorage.setItem("dailyProgress", JSON.stringify(progress));
 
+          // 데일리 모드 기록 업데이트
+          const currentRecord = JSON.parse(
+            localStorage.getItem("dailyRecord") || "{}"
+          );
+          if (!currentRecord.time || this.elapsedTime < currentRecord.time) {
+            localStorage.setItem(
+              "dailyRecord",
+              JSON.stringify({
+                time: this.elapsedTime,
+                score: this.score,
+              })
+            );
+          }
+
           const minutes = Math.floor(this.elapsedTime / 60);
           const seconds = this.elapsedTime % 60;
           const timeString = `${String(minutes).padStart(2, "0")}:${String(
